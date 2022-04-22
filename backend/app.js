@@ -1,12 +1,12 @@
-const http = require('http');
+// const http = require('http');
 
-const server = http.createServer((req, res) => {
-    res.end('Hello this is addressbook server');
-});
+// const server = http.createServer((req, res) => {
+//     res.end('Hello this is addressbook server');
+// });
 
-server.listen(3001, () => {
-    console.log('Server is started');
-});
+// server.listen(3001, () => {
+//     console.log('Server is started');
+// });
 
 
 
@@ -22,29 +22,50 @@ server.listen(3001, () => {
 // })
 
 
-// const express = require('express');
-// const app = express();
-// const books = [{
-//         id: 1,
-//         description: "Math",
-//     },
-//     {
-//         id: 2,
-//         description: "Biology",
-//     },
-//     {
-//         id: 3,
-//         description: "programing",
-//     },
-// ];
-// app.get("/books", (req, res) => {
-//     const data = JSON.stringify({
-//         success: true,
-//         result: books
-//     });
-//     res.send(data);
-// });
+const express = require('express');
+const app = express();
+app.use(express.json());
+const books = [{
+        id: 1,
+        description: "Math",
+    },
+    {
+        id: 2,
+        description: "Biology",
+    },
+    {
+        id: 3,
+        description: "programing",
+    },
+];
+app.get("/", (req, res) => {
+    console.log(req);
 
-// app.listen(3001, () => {
-//     console.log("Server is started");
-// });
+    res.send(data);
+});
+
+app.get("/books", (req, res) => {
+    //  res.setHeader("Content-Type", "application/json");
+    //  res.setHeader("My-Header", "ABC");
+    // res.status(500).json({ message: 'Something went wrong' });
+    res.status(200).json({ message: "Sucessful" });
+
+    // res.json({
+    //     success: true,
+    //     result: books
+    // });
+
+});
+app.get("/api/book", (req, res) => { // -> /api/book
+    console.log(req.query);
+    res.status(200).json({ message: "Sucessfull", data: req.query });
+});
+
+app.post('/api/create-book', (req, res) => { // /api/create-book
+    console.log(req.body);
+    res.status(200).json({ message: "Sucessfull", data: req.body });
+});
+
+app.listen(3001, () => {
+    console.log("Server is started");
+});

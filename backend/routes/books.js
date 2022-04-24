@@ -1,14 +1,28 @@
 const express = require("express");
-const { getAllBooks, createBook } = require("../controllers/booksController");
+const { getAllBooks, createBook, updateBook, deleteBook } = require("../controllers/booksController");
 const router = express.Router();
 
 router.route('/books').get(getAllBooks);
 
 router.route('/create-book').post(createBook);
 
+router.route('/book/:id').put(updateBook);
+
+router.route('/book/:id').delete(deleteBook);
+
 module.exports = router;
 
 
+
+// const express = require("express");
+// const { getAllBooks, createBook } = require("../controllers/booksController");
+// const router = express.Router();
+
+// router.route('/books').get(getAllBooks);
+
+// router.route('/create-book').post(createBook);
+
+// module.exports = router;
 
 // app.get("/", (req, res) => { // api/
 //   console.log(req);
